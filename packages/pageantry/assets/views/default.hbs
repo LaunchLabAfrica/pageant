@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{#if page.title}}{{page.title}}{{else}}{{folder}}{{/if}}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="IhRUY-Jjf8wZGfZ_VMf4QitMQVs-Yz-DkPJzb5iIwDc" />
+  <meta name="canonical" content="{{page.canonical}}" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@pauldariye">
+  <meta name="og:title" content="{{page.title}}">
+  <meta name="author" content="Paul Dariye">
+  <meta name="og:url" content="{{page.canonical}}">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet"
+        href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand" rel="stylesheet">
+  <link rel="stylesheet" href="{{assetsDir}}/style.css" />
+  <link rel="stylesheet" href="{{assetsDir}}/code.css"/>
+</head>
+<body>
+  <progress value="0"></progress>
+  {{> header}}
+  {{#if page.content}}
+    <main>
+      <div><span class="views">{{#if page.views}}{{page.views}} views{{/if}}</span></div>
+      {{{page.content}}}
+    </main>
+  {{/if}}
+  {{> footer}}
+    <!-- inject analytics scripts -->
+  <script type="text/javascript" src="{{assetsDir}}/app.js"></script>
+  <!-- inject user-defined scripts -->
+</body>
+</html>

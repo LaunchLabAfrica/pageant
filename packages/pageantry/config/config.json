@@ -1,0 +1,68 @@
+{
+  "extensions": {
+    "exclude": [
+      ".git",
+      ".DS_Store",
+      "404",
+      "500"
+    ],
+    "image": [
+      ".jpeg",
+      ".jpg",
+      ".png",
+      ".gif",
+      ".bmp",
+      ".tiff",
+      ".tif",
+      ".ico",
+      ".svg"
+    ],
+    "download": [
+      ".zip",
+      ".pdf"
+    ]
+  },
+  "converter": {
+    "flavor": "github",
+    "options": {
+      "omitExtraWLInCodeBlocks": false,
+      "noHeaderId": false,
+      "customizedHeaderId": true,
+      "ghCompatibleHeaderId": true,
+      "prefixHeaderId": false,
+      "rawPrefixHeaderId": false,
+      "rawHeaderId": false,
+      "headerLevelStart": 1,
+      "parseImgDimensions": true,
+      "simplifiedAutoLink": true,
+      "literalMidWordUnderscores": false,
+      "strikethrough": true,
+      "tables": true,
+      "tablesHeaderId": true,
+      "ghCodeBlocks": true,
+      "tasklists": true,
+      "smoothLivePreview": true,
+      "smartIndentationFix": true,
+      "disableForced4SpacesIndentedSublists": true,
+      "simpleLineBreaks": true,
+      "requireSpaceBeforeHeadingText": false,
+      "ghMentions": false,
+      "ghMentionsLink": false,
+      "encodeEmails": true,
+      "openLinksInNewWindow": false,
+      "backslashEscapesHTMLTags": true,
+      "emoji": true,
+      "underline": true,
+      "underscores": true,
+      "completeHTMLDocument": false,
+      "metadata": true,
+      "splitAdjacentBlockquotes": true,
+       "extensions": [
+         "youtube",
+         "relative",
+         "codehighlight",
+         "video"
+       ]
+    }
+  }
+}

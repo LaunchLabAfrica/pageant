@@ -1,0 +1,94 @@
+{
+  "name": "@pageantry/pageantry",
+  "version": "0.0.1",
+  "description": "A zero-config server-rendered site generator",
+  "keywords": [
+    "pageantry",
+    "generator",
+    "micro"
+  ],
+  "author": "Paul Dariye <paul.dariye@gmail.com>",
+  "homepage": "https://pageantry.now.sh",
+  "license": "MIT",
+  "main": "dist/bin/pageantry",
+  "module": "dist/bin/pageantry.esm",
+  "directories": {
+    "dist": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pageantry/pageantry.git"
+  },
+  "bin": {
+    "pageantry": "./dist/bin/pageantry"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "NODE_ENV=production yarn clean && rollup -c",
+    "dev": "NODE_ENV=development yarn clean && rollup -c -w",
+    "pretest": "yarn build",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/pageantry/pageantry/issues"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "yarn": ">= 1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "autoprefixer": "^9.4.2",
+    "is-builtin-module": "^3.0.0",
+    "jest": "^23.6.0",
+    "node-sass": "^4.11.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-babel-minify": "^6.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-copy-assets": "^1.0.0",
+    "rollup-plugin-delete": "^0.1.2",
+    "rollup-plugin-filesize": "^5.0.1",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-multi-dest": "^1.0.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^1.6.3",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-visualizer": "^0.9.2"
+  },
+  "dependencies": {
+    "args": "^5.0.0",
+    "chalk": "^2.4.1",
+    "deepmerge": "^3.0.0",
+    "denodeify": "^1.2.1",
+    "handlebars": "^4.0.12",
+    "handlebars-layouts": "^3.1.4",
+    "highlight.js": "^9.13.1",
+    "load-json-file": "^5.1.0",
+    "lru-cache": "^5.1.1",
+    "micro": "^9.3.3",
+    "mime": "^2.4.0",
+    "opn": "^5.4.0",
+    "showdown": "^1.9.0",
+    "showdown-twitter": "^1.1.0",
+    "showdown-youtube": "^1.2.1",
+    "@pageantry/showdown-highlight": "0.0.1",
+    "@pageantry/showdown-relative": "0.0.1",
+    "unslug": "^0.1.0",
+    "url": "^0.11.0",
+    "write-json-file": "^3.0.2"
+  }
+}

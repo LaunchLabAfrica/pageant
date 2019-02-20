@@ -1,0 +1,42 @@
+{
+  "name": "@pageantry/showdown-relative",
+  "version": "0.0.1",
+  "description": "A simple relative path extension for showdownjs",
+  "keywords": [
+    "showdownjs",
+    "extension",
+    "relative",
+    "path"
+  ],
+  "author": "Paul Dariye <paul.dariye@gmail.com>",
+  "homepage": "https://github.com/pageantry/pageantry/tree/master/packages/showdown-relative",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pageantry/pageantry/tree/master/packages/showdown-relative"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.1.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  }
+}

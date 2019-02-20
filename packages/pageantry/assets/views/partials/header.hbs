@@ -1,0 +1,26 @@
+<header>
+  <nav>
+    <span class="path">&nbsp; {{#each path}}
+      <a href="/{{url}}">{{name}}</a> {{/each}}
+    </span>
+    <ul class="directories">
+      {{#each directories}}
+        <li><a href="/{{relative}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+    <ul class="downloads">
+      {{#each downloads}}
+        <li>
+          <a
+            href="/{{relative}}"
+            alt="{{name}}"
+            title="{{name}}"
+            class="download {{extension}}"
+            download={{name}}>{{name}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+</header>
+

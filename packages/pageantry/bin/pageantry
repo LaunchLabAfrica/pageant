@@ -1,0 +1,224 @@
+#!/usr/bin/env node
+
+import arg from 'arg'
+import opn from 'opn'
+import { red } from 'chalk'
+import merge from 'deepmerge'
+import pkg from '../package.json'
+import {
+  createDirectory,
+  isDirectory,
+  existsInDirectory,
+  writeToFile,
+  pathExists
+} from '../config/files'
+import {
+  readConfigFile,
+  readLocalConfigFile
+} from '../config'
+import {
+  pageantry as buildPageantry
+} from '../'
+
+// Default config file
+let config = readConfigFile()
+
+const args = arg({
+  '--version': Boolean,
+  '--help': Boolean,
+  'help': Boolean,
+  '--config': String,
+  '--layouts': String,
+  '--dir': String,
+  '--port': Number,
+  '--dev': Boolean,
+  '-v': '--version',
+  '-h': '--help',
+  'help': '--help',
+  '-c': '--config',
+  '-l': '--layouts',
+  '-d': '--dir',
+  'dev': '--dev',
+  '-p': '--port'
+})
+
+
+const {
+  '--version': version,
+  '--help': help,
+  '--dir': dir,
+  '--config': localConfig,
+  '--layouts': views,
+  '--dev': dev,
+  '--port': port = 3000,
+} = args
+
+// if (notSupported) {
+//   if (notSupported._.length === 0 ) {
+//     console.log(`
+//       Looks like you didn't provide a directory to serve.
+//
+//       To pass a valid directory path enter:
+//         $ pageantry --dir <dir>
+//
+//       To view valid options enter:
+//         $ pageantry --help
+//     `)
+//   } else {
+//   console.log(`
+//     The flag you entered isn't supported!
+//
+//     To view valid options enter:
+//       $ pageantry --help
+//   `)
+//
+//   }
+//   process.exit(0)
+// }
+
+if (version) {
+  console.log(`
+    ${pkg.version}
+  `)
+  process.exit(0)
+}
+
+if (help) {
+  console.log(`
+    Description
+      Show your work simply and elegantly.
+
+    Usage
+      $ pageantry --help
+      $ pageantry --version
+      $ pageantry --port <port> --config <pageantry.json> --dir <dir>
+
+    Options
+      --config, -s       A .json file containing your configuration.
+      --layouts, -l      A folder containing view templates for your website. (Advanced option)
+      --dir, -d          A directory containing your site source files.
+      --port, -p         A port number to start your site. (Default: 3000)
+      --help, -h         Display options
+  `)
+  process.exit(0)
+}
+
+if (!dir) {
+  console.log(`
+    You must pass in a directory to showcase!
+
+    To view options enter:
+      $ pageantry --help
+  `)
+  process.exit(0)
+}
+
+if (isNaN(parseInt(port))) {
+  console.log(`
+    You must pass in a valid port number!
+
+    To view options enter:
+      $ pageantry --help
+  `)
+  process.exit(0)
+}
+
+if (localConfig) {
+  if (!pathExists(localConfig)) {
+    console.log(`
+      File ${config} does not exist!
+
+      Provide valid config
+    `)
+    process.exit(0)
+  }
+
+  const localConfig = readLocalConfigFile(localConfig)
+  config = merge(config, localConfig)
+
+  // lint config
+  // keys:
+  // - site
+  //  - SEO related props
+  //  - analytics related props
+  //  - layout config
+  // - extensions
+  //   - image
+  //   - video
+  //   - exclude
+  //   - preview
+  // - converter
+  //   - options
+  //    - extensions
+  //   - flavor
+}
+
+if (views) {
+  if (!pathExists(views)) {
+    console.log(`
+      Path '${views}' does not exist!
+
+      Provide valid path for custom layouts
+    `)
+    process.exit(0)
+  }
+
+  if (!isDirectory(views)) {
+    console.error(`
+      Path '${views}' is not a directory!
+
+      Provide valid directory for custom layouts
+    `)
+    process.exit(0)
+  }
+
+  // load partials
+  // load layouts
+  // lint directory
+  // ./*.hbs files for layouts
+  // ./partials/*.hbs files for partials
+}
+
+async function main() {
+  try {
+    const pageantry = await buildPageantry({
+      dir,
+      dev,
+      config
+    })
+    pageantry.listen(parseInt(port), async (err) => {
+      process.on('SIGINT', () => {
+        pageantry.close()
+        process.exit(0)
+      })
+
+
+      if (!await isDirectory(dir)) {
+        console.error(red(`Specified directory doesn't exist!`))
+        process.exit(1)
+      }
+
+      if (!await existsInDirectory(dir, '404')) {
+        await createDirectory(dir, '404')
+        const file = `${dir}/404/README.md`
+        await writeToFile(file, '# Page Not Found')
+      }
+
+      if (!await existsInDirectory(dir, '500')) {
+        await createDirectory(dir, '500')
+        const file = `${dir}/500/README.md`
+        await writeToFile(file, '# Server Error')
+      }
+
+      const url = `http://localhost:${pageantry.address().port}`
+
+      console.log(`Running on ${url}`)
+      if (dev) opn(url)
+    })
+  } catch(err) {
+    console.error(red(err.message))
+  }
+}
+
+main()
+

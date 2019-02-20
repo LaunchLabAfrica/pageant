@@ -1,0 +1,29 @@
+{
+  "lerna": "3.4.3",
+  "version": "0.0.1",
+  "changelog": {
+    "repo": "pageantry/pageantry",
+    "cacheDir": ".changelog"
+  },
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "examples/*",
+        "test/*",
+        "site/*",
+        "*.md",
+        "*.test.js",
+        ".eslintrc",
+        ".eslintignore",
+        "package.json"
+      ]
+    }
+  },
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
+  ]
+}
